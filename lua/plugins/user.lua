@@ -18,6 +18,10 @@ return {
           },
         },
       },
+      image = {
+        enabled = true,
+        convert = { magick = { vector = { "-density", 192, "{src}[0]" } } },
+      },
     },
   },
   -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above

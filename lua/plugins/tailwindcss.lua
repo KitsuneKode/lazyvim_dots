@@ -7,7 +7,7 @@ return {
       local cwd = vim.fn.getcwd()
       local is_monorepo = vim.fn.filereadable(cwd .. "/turbo.json") == 1
         or vim.fn.filereadable(cwd .. "/pnpm-workspace.yaml") == 1
-        or vim.fn.filereadable(cwd .. "/bun.lockb") == 1
+        or vim.fn.filereadable(cwd .. "/bun.lock") == 1
 
       local experimental = {}
 

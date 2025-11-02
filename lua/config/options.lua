@@ -25,13 +25,13 @@ vim.opt.winblend = 0
 -- local options = {
 --
 --   base46 = {
---     theme = "catpuccin-mocha", -- default theme
+--     theme = "one-dark", -- default theme
 --     hl_add = {},
 --     hl_override = {},
 --     integrations = {},
 --     changed_themes = {},
 --     transparency = false,
---     theme_toggle = { "catpuccin-mocha", "catpuccin" },
+--     theme_toggle = { "onedark", "one_light" },
 --   },
 --
 --   ui = {

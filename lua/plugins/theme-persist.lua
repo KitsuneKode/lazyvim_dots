@@ -1,3 +1,6 @@
+if true then
+  return {}
+end
 -- lua/plugins/theme-persist.lua
 local cache = vim.fs.joinpath(vim.fn.stdpath("state"), "last_colorscheme")
 
