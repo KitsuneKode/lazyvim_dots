@@ -37,7 +37,7 @@ M.ui = {
 }
 
 M.lsp = {
-  signature = true, -- Enable LSP signature help
+  signature = false, -- Enable LSP signature help
 }
 
 M.colorify = {
