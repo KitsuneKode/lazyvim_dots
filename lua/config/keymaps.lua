@@ -17,4 +17,4 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Next and center", remap = false })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous and center", remap = false })
 
 -- Paste after select without losing clipboard content
-vim.keymap.set("v", "<leader>P", "_dP", { desc = "Paste after select paste", remap = false })
+vim.keymap.set({ "v", "n" }, "<leader>P", "_dP", { desc = "Paste after select paste", remap = false })

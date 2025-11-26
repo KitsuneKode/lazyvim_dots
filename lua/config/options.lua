@@ -1,10 +1,12 @@
--- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+-- Options are automatically loaded before lazy.nvim startup
 -- Add any additional options
 --
 -- vim.opt.winbar = "%=%m %f"
 vim.opt.backupcopy = "yes"
-vim.g.lazyvim_prettier_needs_config = false
+
+vim.g.lazyvim_prettier_needs_config = true
+
 vim.keymap.set({ "n" }, "<C-k>", function()
   require("lsp_signature").toggle_float_win()
 end, { desc = "Toggle Signature Help" })
