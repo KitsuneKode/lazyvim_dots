@@ -1,7 +1,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "catppuccin", -- choose your theme
+  theme = "tundra", -- choose your theme
   transparency = false,
 
   integrations = {

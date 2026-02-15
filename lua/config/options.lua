@@ -4,7 +4,7 @@
 --
 -- vim.opt.winbar = "%=%m %f"
 vim.opt.backupcopy = "yes"
-
+vim.g.omni_sql_no_default_maps = 1
 vim.g.lazyvim_prettier_needs_config = true
 
 vim.keymap.set({ "n" }, "<C-k>", function()
