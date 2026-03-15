@@ -70,7 +70,7 @@ return {
     end,
   },
   { "nvim-tree/nvim-web-devicons", lazy = true },
-
+  { "rafamadriz/friendly-snippets" },
   {
 
     "akinsho/bufferline.nvim",
@@ -97,18 +97,73 @@ return {
   -- },
   { "andweeb/presence.nvim", lazy = false },
   { "wakatime/vim-wakatime", lazy = false },
-  { "mg979/vim-visual-multi" },
-
+  { "tpope/vim-fugitive" },
   {
-    "windwp/nvim-ts-autotag",
-    opts = {
-      opts = { -- Defaults
-        enable_close = true, -- Auto close tags
-
-        enable_rename = true, -- Auto rename pairs of tags
-        enable_close_on_slash = false, -- Auto close on trailing </,
-      },
+    "smoka7/multicursors.nvim",
+    dependencies = { "nvimtools/hydra.nvim" },
+    opts = {},
+    keys = {
+      { "<C-n>", "<cmd>MCstart<cr>", mode = { "n", "v" } },
     },
-    -- event = { "BufReadPre", "BufNewFile" },
   },
+  --
+  {
+    "zbirenbaum/copilot.lua",
+    config = function(_, opts)
+      require("copilot").setup(opts)
+      if vim.env.NVIM_NO_COPILOT then
+        require("copilot.command").disable()
+      end
+    end,
+  },
+
+  --
+  -- breaks cmp
+  -- {
+  --   "mg979/vim-visual-multi",
+  --
+  --   init = function()
+  --     vim.g.VM_default_mappings = 0
+  --   end,
+  -- },
+  -- {
+  --   "windwp/nvim-ts-autotag",
+  --   opts = {
+  --     opts = {
+  --       -- Defaults
+  --       -- enable_close = true, -- Auto close tags
+  --       -- enable_rename = true, -- Auto rename pairs of tags
+  --       -- enable_close_on_slash = false, -- Auto close on trailing </,
+  --     },
+  --   },
+  --   -- event = { "BufReadPre", "BufNewFile" },
+  -- },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     servers = { eslint = {} },
+  --     setup = {
+  --       eslint = function()
+  --         require("lazyvim.util").lsp.on_attach(function(client)
+  --           if client.name == "eslint" then
+  --             client.server_capabilities.documentFormattingProvider = true
+  --           elseif client.name == "tsserver" then
+  --             client.server_capabilities.documentFormattingProvider = false
+  --           end
+  --         end)
+  --       end,
+  --     },
+  --   },
+  -- },
+  --
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   opts = {
+  --     transparent = true,
+  --     styles = {
+  --       sidebars = "transparent",
+  --       floats = "transparent",
+  --     },
+  --   },
+  -- },
 }
