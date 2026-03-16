@@ -19,15 +19,24 @@ return {
 
   -- Ensure nvim-lint biome requires config (already default but reinforce)
   {
-    "mfussenegger/nvim-lint",
+    "stevearc/conform.nvim",
     opts = function(_, opts)
-      opts.linters = opts.linters or {}
-      opts.linters.biome = vim.tbl_deep_extend("force", opts.linters.biome or {}, {
-        condition = function(utils)
-          -- Biome ONLY runs if biome.json/biome.jsonc exists in cwd
-          return utils.root_has_file("biome.json") or utils.root_has_file("biome.jsonc")
-        end,
-      })
+      -- Only use biome when biome.json exists in project
+      local has_biome = vim.fs.find({ "biome.json", "biome.jsonc" }, {
+        upward = true,
+        path = vim.fn.getcwd(),
+      })[1]
+
+      if not has_biome then
+        -- Remove biome from all formatters, fall back to prettier
+        for ft, formatters in pairs(opts.formatters_by_ft or {}) do
+          if type(formatters) == "table" then
+            opts.formatters_by_ft[ft] = vim.tbl_filter(function(f)
+              return f ~= "biome" and f ~= "biome-check"
+            end, formatters)
+          end
+        end
+      end
     end,
   },
 }
