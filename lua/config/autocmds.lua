@@ -106,3 +106,23 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     update_diagnostics()
   end,
 })
+
+local function fix_visual_mode()
+  vim.api.nvim_set_hl(0, "Visual", {
+    bg = "#2A3940",
+    fg = "NONE",
+    nocombine = true,
+  })
+
+  vim.api.nvim_set_hl(0, "VisualNOS", {
+    bg = "#2A3940",
+    fg = "NONE",
+    nocombine = true,
+  })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = fix_visual_mode,
+})
+
+fix_visual_mode()
