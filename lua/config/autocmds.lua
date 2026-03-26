@@ -109,13 +109,13 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 
 local function fix_visual_mode()
   vim.api.nvim_set_hl(0, "Visual", {
-    bg = "#2A3940",
+    bg = "#2e3c42",
     fg = "NONE",
     nocombine = true,
   })
 
   vim.api.nvim_set_hl(0, "VisualNOS", {
-    bg = "#2A3940",
+    bg = "#2e3c42",
     fg = "NONE",
     nocombine = true,
   })
