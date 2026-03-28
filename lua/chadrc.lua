@@ -4,6 +4,17 @@ M.base46 = {
   theme = "rxyhn", -- choose your theme
   transparency = false,
 
+  hl_override = {
+    Visual = {
+      bg = "#2e3c42",
+      fg = "NONE",
+    },
+    VisualNOS = {
+      bg = "#2e3c42",
+      fg = "NONE",
+    },
+  },
+
   integrations = {
     "dap",
     "cmp",
