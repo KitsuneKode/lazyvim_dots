@@ -4,7 +4,7 @@
 
 return {
   { "nvim-lualine/lualine.nvim", enabled = false },
-  -- { "akinsho/bufferline.nvim", enabled = false },
+  { "akinsho/bufferline.nvim", enabled = true },
 
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
@@ -35,10 +35,20 @@ return {
     "nvim-lua/plenary.nvim",
     lazy = false,
   },
+  -- {
+  --   "LazyVim/LazyVim",
+  --   opts = {
+  --     colorscheme = "catppuccin-mocha",
+  --   },
+  -- },
   {
-    "LazyVim/LazyVim",
+    "folke/tokyonight.nvim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
     },
   },
 }
