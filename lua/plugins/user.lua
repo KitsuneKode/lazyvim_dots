@@ -56,13 +56,31 @@ return {
       },
     },
     init = function()
-      -- Only restore session if nvim was started with no arguments
       vim.api.nvim_create_autocmd("VimEnter", {
         group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
         callback = function()
-          -- Check if any arguments were passed
           if vim.fn.argc() == 0 then
+            -- 1. Load the session INSTANTLY.
+            -- This stops the dashboard from rendering and kills the UI flicker.
             require("persistence").load()
+
+            -- 2. Re-attach LSP after session restore.
+            -- LazyVim removed vim.schedule_wrap from lspconfig's config, so
+            -- vim.lsp.enable()'s doautoall no longer fires after VimEnter.
+            -- Two paths need covering:
+            --   a) Servers via vim.lsp.enable() (new Neovim 0.11 path):
+            --      doautoall fires FileType for every open buffer.
+            --   b) Servers via lspconfig.setup() (null-ls, etc., old path):
+            --      BufReadPost on current buf triggers their lspconfig-augroup
+            --      handler, whose M.launch() then scans all root-dir buffers.
+            vim.schedule(function()
+              pcall(require, "lspconfig")
+              pcall(vim.cmd, "doautoall nvim.lsp.enable FileType")
+              local buf = vim.api.nvim_get_current_buf()
+              if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buftype == "" then
+                vim.api.nvim_exec_autocmds("BufReadPost", { buffer = buf, modeline = false })
+              end
+            end)
           end
         end,
         nested = true,
