@@ -65,17 +65,15 @@ return {
             require("persistence").load()
 
             -- 2. Re-attach LSP after session restore.
-            -- LazyVim removed vim.schedule_wrap from lspconfig's config, so
-            -- vim.lsp.enable()'s doautoall no longer fires after VimEnter.
-            -- Two paths need covering:
-            --   a) Servers via vim.lsp.enable() (new Neovim 0.11 path):
-            --      doautoall fires FileType for every open buffer.
-            --   b) Servers via lspconfig.setup() (null-ls, etc., old path):
-            --      BufReadPost on current buf triggers their lspconfig-augroup
-            --      handler, whose M.launch() then scans all root-dir buffers.
+            -- Covers both Neovim 0.11 native LSP and legacy lspconfig paths.
             vim.schedule(function()
+              -- Ensure lspconfig is loaded
               pcall(require, "lspconfig")
-              pcall(vim.cmd, "doautoall nvim.lsp.enable FileType")
+
+              -- Trigger FileType for all background buffers (New Neovim 0.11 path)
+              vim.cmd("silent! doautoall FileType")
+
+              -- Trigger BufReadPost for the actively focused buffer (Legacy path)
               local buf = vim.api.nvim_get_current_buf()
               if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buftype == "" then
                 vim.api.nvim_exec_autocmds("BufReadPost", { buffer = buf, modeline = false })
