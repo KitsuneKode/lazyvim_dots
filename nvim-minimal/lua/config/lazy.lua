@@ -35,7 +35,7 @@ require("lazy").setup({
     version = false,
   },
   install = {
-    colorscheme = { "habamax" },
+    colorscheme = { "tokyonight", "habamax" },
     missing = vim.env.NVIM_MINIMAL_NO_INSTALL ~= "1",
   },
   checker = {
