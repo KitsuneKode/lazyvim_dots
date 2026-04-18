@@ -58,3 +58,21 @@ require("lazy").setup({
 for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
   dofile(vim.g.base46_cache .. v)
 end
+
+-- After base46 applies its cached highlights, clear bg for transparent terminal
+-- passthrough. Only active in kitty-scrollback so Normal mode is unaffected.
+if vim.env.KITTY_SCROLLBACK_NVIM == 'true' then
+  local transparent_groups = {
+    'Normal', 'NormalNC', 'NormalFloat', 'NormalSB',
+    'EndOfBuffer', 'Folded', 'SignColumn', 'LineNr', 'CursorLineNr',
+    'WinBar', 'WinBarNC',
+  }
+  for _, group in ipairs(transparent_groups) do
+    local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = group, link = false })
+    if ok and hl then
+      hl.bg = nil
+      hl.ctermbg = nil
+      vim.api.nvim_set_hl(0, group, hl)
+    end
+  end
+end
