@@ -1,10 +1,12 @@
 local M = {}
 
+local transparency = false
+
 M.base46 = {
   theme = "rxyhn", -- choose your theme
-  transparency = false,
+  transparency = transparency,
 
-  hl_override = {
+  hl_override = vim.tbl_extend("force", {
     Visual = {
       bg = "#2e3c42",
       fg = "NONE",
@@ -13,7 +15,12 @@ M.base46 = {
       bg = "#2e3c42",
       fg = "NONE",
     },
-  },
+  }, transparency and {
+    BufferLineFill = { bg = "NONE" },
+    BufferLineBackground = { bg = "NONE" },
+    WinBar = { bg = "NONE" },
+    WinBarNC = { bg = "NONE" },
+  } or {}),
 
   integrations = {
     "dap",
