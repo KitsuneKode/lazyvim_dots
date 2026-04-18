@@ -2,14 +2,11 @@ local in_ksb = vim.env.KITTY_SCROLLBACK_NVIM == 'true'
 
 
 return {
-  -- Disable session restore inside kitty-scrollback (it would load your editor session, trashing the UI)
-  { 'folke/persistence.nvim', cond = not in_ksb },
-
-  -- Hide bufferline tab bar inside kitty-scrollback
-  { 'akinsho/bufferline.nvim', cond = not in_ksb },
-
-  -- Disable Discord presence inside kitty-scrollback
-  { 'andweeb/presence.nvim', cond = not in_ksb },
+  { 'folke/persistence.nvim',   cond = not in_ksb },
+  { 'akinsho/bufferline.nvim',  cond = not in_ksb },
+  { 'andweeb/presence.nvim',    cond = not in_ksb },
+  { 'wakatime/vim-wakatime',    cond = not in_ksb },
+  { 'zbirenbaum/copilot.lua',   cond = not in_ksb },
 
   {
     'mikesmithgh/kitty-scrollback.nvim',
@@ -22,8 +19,8 @@ return {
         {
           status_window = {
             enabled = true,
-            autoclose = true,   -- hide status badge once ready
-            show_timer = true,
+            autoclose = false,
+            show_timer = false,
           },
           paste_window = {
             highlight_as_normal_win = true,  -- paste window looks like a normal buffer
