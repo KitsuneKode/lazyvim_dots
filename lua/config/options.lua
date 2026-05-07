@@ -23,3 +23,6 @@ vim.opt.cursorline = false
 
 vim.opt.pumblend = 0
 vim.opt.winblend = 0
+
+vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_ruff = "ruff"
