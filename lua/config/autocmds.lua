@@ -106,4 +106,3 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     update_diagnostics()
   end,
 })
-
