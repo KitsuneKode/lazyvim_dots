@@ -106,3 +106,29 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     update_diagnostics()
   end,
 })
+
+-- Zed ~/.config/zed/*.json is JSONC (comments, trailing commas)
+vim.filetype.add({
+  pattern = {
+    [".*/%.config/zed/.*%.json$"] = "jsonc",
+  },
+})
+
+vim.api.nvim_create_augroup("zed_jsonc_filetype", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "zed_jsonc_filetype",
+  pattern = "json",
+  callback = function(event)
+    local path = vim.api.nvim_buf_get_name(event.buf)
+    if path == "" then
+      return
+    end
+    path = vim.fs.normalize(path)
+    local zed_dir = vim.fs.normalize(vim.fn.expand("~/.config/zed"))
+    if path:find(zed_dir .. "/", 1, true) and path:match("%.json$") then
+      vim.bo[event.buf].filetype = "jsonc"
+    end
+  end,
+  desc = "Zed config: override json → jsonc",
+})

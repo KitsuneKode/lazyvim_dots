@@ -59,7 +59,7 @@ return {
       vim.api.nvim_create_autocmd("VimEnter", {
         group = vim.api.nvim_create_augroup("restore_session", { clear = true }),
         callback = function()
-          if vim.fn.argc() == 0 and vim.env.KITTY_SCROLLBACK_NVIM ~= 'true' then
+          if vim.fn.argc() == 0 and vim.env.KITTY_SCROLLBACK_NVIM ~= "true" then
             -- 1. Load the session INSTANTLY.
             -- This stops the dashboard from rendering and kills the UI flicker.
             require("persistence").load()
@@ -112,7 +112,6 @@ return {
   --   },
   -- },
   { "andweeb/presence.nvim", lazy = false },
-  { "wakatime/vim-wakatime", lazy = false },
   { "tpope/vim-fugitive" },
   {
     "smoka7/multicursors.nvim",
